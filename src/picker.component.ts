@@ -360,6 +360,8 @@ export class DatetimePickerComponent implements OnInit {
 
     return constraints.every((currentRule) => {
       let isValid = true;
+      
+      currentRule=JSON.parse(currentRule);
 
       if (currentRule.after) {
         let afterDate = this.createDate(currentRule.after);
