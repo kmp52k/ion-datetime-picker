@@ -318,7 +318,7 @@ DatetimePickerComponent = __decorate([
         template: `
     <div *ngIf="dateEnabled" class="row month-year">
       <div class="col left-arrow" col-auto>
-        <button type="button" ion-button icon-only clear (click)="changeBy(-1, 'month')"><ion-icon name="arrow-back"></ion-icon></button>
+        <button type="button" ion-button icon-only clear (click)="changeBy(-1, 'month')"><ion-icon class="pwcorange" name="arrow-back"></ion-icon></button>
       </div>
       <label class="col month-input">
         <div class="item item-input item-select">
@@ -335,7 +335,7 @@ DatetimePickerComponent = __decorate([
         </div>
       </label>
       <div class="col right-arrow" col-auto>
-        <button type="button" ion-button icon-only clear (click)="changeBy(+1, 'month')"><ion-icon name="arrow-forward"></ion-icon></button>
+        <button type="button" ion-button icon-only clear (click)="changeBy(+1, 'month')"><ion-icon class="pwcorange" name="arrow-forward"></ion-icon></button>
       </div>
     </div>
 
@@ -358,13 +358,13 @@ DatetimePickerComponent = __decorate([
 
     <div *ngIf="timeEnabled" class="row time-buttons">
       <div class="col"></div>
-      <div class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(+1, 'hour')"><ion-icon name="arrow-up"></ion-icon></button></div>
+      <div class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(+1, 'hour')"><ion-icon class="pwcorange" name="arrow-up"></ion-icon></button></div>
       <div class="col"></div>
-      <div class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(+1, 'minute')"><ion-icon name="arrow-up"></ion-icon></button></div>
+      <div class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(+1, 'minute')"><ion-icon class="pwcorange" name="arrow-up"></ion-icon></button></div>
       <div *ngIf="secondsEnabled" class="col"></div>
-      <div *ngIf="secondsEnabled" class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(+1, 'second')"><ion-icon name="arrow-up"></ion-icon></button></div>
+      <div *ngIf="secondsEnabled" class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(+1, 'second')"><ion-icon class="pwcorange" name="arrow-up"></ion-icon></button></div>
       <div *ngIf="meridiemEnabled" class="col"></div>
-      <div *ngIf="meridiemEnabled" class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(+12, 'hour')"><ion-icon name="arrow-up"></ion-icon></button></div>
+      <div *ngIf="meridiemEnabled" class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(+12, 'hour')"><ion-icon class="pwcorange" name="arrow-up"></ion-icon></button></div>
       <div class="col"></div>
     </div>
     <div *ngIf="timeEnabled" class="row time">
@@ -404,13 +404,13 @@ DatetimePickerComponent = __decorate([
     </div>
     <div *ngIf="timeEnabled" class="row time-buttons">
       <div class="col"></div>
-      <div class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(-1, 'hour')"><ion-icon name="arrow-down"></ion-icon></button></div>
+      <div class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(-1, 'hour')"><ion-icon class="pwcorange" name="arrow-down"></ion-icon></button></div>
       <div class="col"></div>
-      <div class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(-1, 'minute')"><ion-icon name="arrow-down"></ion-icon></button></div>
+      <div class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(-1, 'minute')"><ion-icon class="pwcorange" name="arrow-down"></ion-icon></button></div>
       <div *ngIf="secondsEnabled" class="col"></div>
-      <div *ngIf="secondsEnabled" class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(-1, 'second')"><ion-icon name="arrow-down"></ion-icon></button></div>
+      <div *ngIf="secondsEnabled" class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(-1, 'second')"><ion-icon class="pwcorange" name="arrow-down"></ion-icon></button></div>
       <div *ngIf="meridiemEnabled" class="col"></div>
-      <div *ngIf="meridiemEnabled" class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(-12, 'hour')"><ion-icon name="arrow-down"></ion-icon></button></div>
+      <div *ngIf="meridiemEnabled" class="col" col-2><button type="button" ion-button icon-only clear (click)="changeBy(-12, 'hour')"><ion-icon class="pwcorange" name="arrow-down"></ion-icon></button></div>
       <div class="col"></div>
     </div>
   `,
@@ -460,19 +460,22 @@ DatetimePickerComponent = __decorate([
       padding: 10px 5px;
     }
     .calendar .day:hover, .calendar .day.activated, .calendar .day.today:hover, .calendar .day.today.activated {
-      background-color: #bdf;
+      //background-color: #bdf;
       color: black;
       cursor: pointer;
     }
     .calendar .day.today {
-      background-color: #e4e4e4;
+      //background-color: #e4e4e4;
+      background-color: #ccc;
     }
     .calendar .day.selected, .calendar .day.selected:hover, .calendar .day.selected.activated {
-      background-color: #387ef5;
+      //background-color: #387ef5;
+      background-color: #DC6900;
       color: white;
     }
     .calendar .day.disabled, .calendar .day.disabled:hover, .calendar .day.disabled.activated {
-      background-color: #ccc;
+      //background-color: #ccc;
+      color: #ccc;
     }
     .calendar .weekday {
       font-weight: bold;
@@ -523,6 +526,9 @@ DatetimePickerComponent = __decorate([
     }
     .time input {
       font-size: 1.2em;
+    }
+    .pwcorange {
+        color: #DC6900;
     }
   `],
         encapsulation: ViewEncapsulation.Emulated,

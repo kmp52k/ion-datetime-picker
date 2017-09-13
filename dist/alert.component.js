@@ -40,18 +40,25 @@ DatetimePickerAlertComponent = __decorate([
     <ion-backdrop (click)="bdClick()" [class.backdrop-no-tappable]="!d.enableBackdropDismiss"></ion-backdrop>
     <div class="alert-wrapper ion-datetime-picker-wrapper">
       <div class="alert-head">
-        <h2 id="{{hdrId}}" class="alert-title" *ngIf="d.title" [innerHTML]="d.title"></h2>
-        <h3 id="{{subHdrId}}" class="alert-sub-title" *ngIf="d.subTitle" [innerHTML]="d.subTitle"></h3>
+        <h2 id="{{hdrId}}" class="alert-title pwcorange" *ngIf="d.title" [innerHTML]="d.title"></h2>
+        <h3 id="{{subHdrId}}" class="alert-sub-title pwcorange" *ngIf="d.subTitle" [innerHTML]="d.subTitle"></h3>
       </div>
       <ion-datetime-picker [modelDate]="d.modelDate" [dateEnabled]="d.dateEnabled" [timeEnabled]="d.timeEnabled" [isMondayFirst]="d.isMondayFirst" [secondsEnabled]="d.secondsEnabled" [meridiemEnabled]="d.meridiemEnabled" [onlyValid]="d.onlyValid" [monthNames]="d.monthNames" [weekdayNames]="d.weekdayNames" (pickerChange)="onChange($event)"></ion-datetime-picker>
       <div class="alert-button-group" [ngClass]="{'alert-button-group-vertical':d.buttons.length>2}">
         <button ion-button="alert-button" *ngFor="let b of d.buttons" (click)="btnClick(b)" [ngClass]="b.cssClass">
-          {{b.text}}
+          <span class="pwcorange">{{b.text}}</span>
         </button>
       </div>
     </div>
   `,
-        styles: [".alert-button-group {flex-shrink: 0;}"],
+        styles: [`
+                .alert-button-group {
+                    flex-shrink: 0;
+                }
+                .pwcorange {
+                    color: #DC6900;
+                }
+            `],
         host: {
             "role": "dialog",
             "[attr.aria-labelledby]": "hdrId",
