@@ -105,9 +105,9 @@ Configure the title and sub title of the popup with the picker.
 Disable/Enable calendar days according to type and date range specified.
 
 ```html
-onlyValid="{'after': '2016-04-09'}"
-onlyValid="{'after': 'today', 'inclusive': true}"
-onlyValid="{'outside': {'initial': '2016-04-09', 'final': '2016-06-15'}, 'inclusive': true}"
+onlyValid='{"after": "2016-04-09"}'
+onlyValid='{"after": "today", "inclusive": true}'
+onlyValid='{"outside": {"initial": "2016-04-09", "final": "2016-06-15"}, "inclusive": true}'
 ```
 
 Types supported: `'after'`, `'before'`, `'between'` and `'outside'`. If you want to include the day specified, set `'inclusive'` property to `true`.
@@ -115,7 +115,7 @@ Types supported: `'after'`, `'before'`, `'between'` and `'outside'`. If you want
 To combine rules, just pass an array and it should do the trick. Rules are complementary (treated with AND, not OR), it means that a date will be available only if it matches all the constraints you pass.
 
 ```html
-onlyValid="[{'after': '2017-01-12'}, {'outside': {'initial': '2017-01-19', 'final': '2017-01-29'}}, {'outside': {'initial': '2017-02-19', 'final': '2017-02-29'}}]"
+onlyValid='[{"after": "2017-01-12"}, {"outside": {"initial": "2017-01-19", "final": "2017-01-29"}}, {"outside": {"initial": "2017-02-19", "final": "2017-02-29"}}]'
 ```
 
 *@TODO Support also `min` and `max` attributes.*
