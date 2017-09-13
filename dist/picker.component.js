@@ -465,8 +465,8 @@ DatetimePickerComponent = __decorate([
       cursor: pointer;
     }
     .calendar .day.today {
-      //background-color: #e4e4e4;
-      background-color: #ccc;
+      background-color: #e4e4e4;
+      //background-color: #ccc;
     }
     .calendar .day.selected, .calendar .day.selected:hover, .calendar .day.selected.activated {
       //background-color: #387ef5;
