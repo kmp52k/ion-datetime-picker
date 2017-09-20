@@ -320,19 +320,32 @@ DatetimePickerComponent = __decorate([
       <div class="col left-arrow" col-auto>
         <button type="button" ion-button icon-only clear (click)="changeBy(-1, 'month')"><ion-icon class="pwcorange" name="arrow-back"></ion-icon></button>
       </div>
-      <label class="col month-input">
+      <label class="col month-input" style="padding: 0px; padding-right: 15px;">
         <div class="item item-input item-select">
-          <select [(ngModel)]="bind.month" (change)="change('month')">
-            <option *ngFor="let month of monthNames; let numberOfMonth = index" [value]="numberOfMonth">{{month}}</option>
-          </select>
+          <ion-select interface="popover" [(ngModel)]="bind.month" (ionChange)="change('month')">
+            <ion-option *ngFor="let month of monthNames; let numberOfMonth = index" [value]="numberOfMonth">{{month}}</ion-option>
+          </ion-select>
         </div>
       </label>
-      <label class="col year-input" col-3>
-        <div class="item item-input">
+      <label class="col year-input" col-3 style="padding: 0px;">
+      <div class="item item-input item-select">
+      <ion-select interface="popover" [(ngModel)]="bind.year" (ionChange)="change('year')" (blur)="changed()" required>
+        <ion-option  value="2017">2017</ion-option>
+        <ion-option  value="2018">2018</ion-option>
+        <ion-option  value="2019">2019</ion-option>
+        <ion-option  value="2020">2020</ion-option>
+        <ion-option  value="2021">2021</ion-option>
+        <ion-option  value="2022">2022</ion-option>
+        <ion-option  value="2023">2023</ion-option>
+        <ion-option  value="2024">2024</ion-option>
+        <ion-option  value="2025">2025</ion-option>
+      </ion-select>
+    </div>
+        <!--div class="item item-input">
           <div>
             <input type="number" [(ngModel)]="bind.year" min="1900" max="2999" (change)="change('year')" (blur)="changed()" required>
           </div>
-        </div>
+        </div-->
       </label>
       <div class="col right-arrow" col-auto>
         <button type="button" ion-button icon-only clear (click)="changeBy(+1, 'month')"><ion-icon class="pwcorange" name="arrow-forward"></ion-icon></button>
@@ -370,7 +383,7 @@ DatetimePickerComponent = __decorate([
     <div *ngIf="timeEnabled" class="row time">
       <div class="col"></div>
       <label class="col" col-2>
-        <div class="item item-input">
+        <div class="item item-input" style="position: static;">
           <div>
             <input type="text" [(ngModel)]="bind.hour" pattern="0?([01]?[0-9]|2[0-3])" (change)="change('hour')" (blur)="changed()" required>
           </div>
@@ -378,7 +391,7 @@ DatetimePickerComponent = __decorate([
       </label>
       <div class="col colon">:</div>
       <label class="col" col-2>
-        <div class="item item-input">
+        <div class="item item-input" style="position: static;">
           <div>
             <input type="text" [(ngModel)]="bind.minute" pattern="0?[0-5]?[0-9]" (change)="change('minute')" (blur)="changed()" required>
           </div>
@@ -386,7 +399,7 @@ DatetimePickerComponent = __decorate([
       </label>
       <div *ngIf="secondsEnabled" class="col colon">:</div>
       <label *ngIf="secondsEnabled" class="col" col-2>
-        <div class="item item-input">
+        <div class="item item-input" style="position: static;">
           <div>
             <input type="text" [(ngModel)]="bind.second" pattern="0?[0-5]?[0-9]" (change)="change('second')" (blur)="changed()" required>
           </div>
@@ -394,7 +407,7 @@ DatetimePickerComponent = __decorate([
       </label>
       <div *ngIf="meridiemEnabled" class="col"></div>
       <label *ngIf="meridiemEnabled" class="col" col-2>
-        <div class="item item-input">
+        <div class="item item-input" style="position: static;">
           <div>
             <input type="text" [(ngModel)]="bind.meridiem" pattern="[aApP][mM]" (change)="change('meridiem')" (blur)="changed()" required>
           </div>
