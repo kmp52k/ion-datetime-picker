@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from "@angular/core";
 let DatetimePickerComponent = class DatetimePickerComponent {
     constructor() {
+        this.allMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        this.showMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         this.pickerChange = new EventEmitter();
         this.rows = [0, 1, 2, 3, 4, 5];
         this.cols = [1, 2, 3, 4, 5, 6, 7];
@@ -31,6 +33,8 @@ let DatetimePickerComponent = class DatetimePickerComponent {
         };
     }
     ngOnInit() {
+        let currentMonth = new Date().getMonth();
+        this.showMonths.splice(0, currentMonth);
         if (this.dateEnabled) {
             let today = new Date();
             this.today = {
@@ -43,6 +47,34 @@ let DatetimePickerComponent = class DatetimePickerComponent {
             this.weekdays = [1, 2, 3, 4, 5, 6, 0];
         }
         this.processModel();
+    }
+    getMonthDisplay() {
+        let year = new Date().getFullYear();
+        if(this.bind.year) {
+            if(this.bind.year>year) {
+                return this.allMonths;
+            }
+            else {
+                return this.showMonths;
+            }
+        }
+        else {
+            return this.showMonths;
+        }
+    }
+    getMonthNumber(index) {
+        let year = new Date().getFullYear();
+        if(this.bind.year) {
+            if(this.bind.year>year) {
+                return index;
+            }
+            else {
+                return index+(new Date().getMonth());
+            }
+        }
+        else {
+            return index+(new Date().getMonth());
+        }
     }
     cellDay(x, y) {
         return y * 7 + x - this.firstDay;
@@ -323,7 +355,7 @@ DatetimePickerComponent = __decorate([
       <label class="col month-input" style="padding: 0px; padding-right: 15px;">
         <div class="item item-input item-select">
           <ion-select interface="popover" [(ngModel)]="bind.month" (ionChange)="change('month')">
-            <ion-option *ngFor="let month of monthNames; let numberOfMonth = index" [value]="numberOfMonth">{{month}}</ion-option>
+            <ion-option *ngFor="let month of getMonthDisplay(); let numberOfMonth = index" [value]="getMonthNumber(numberOfMonth)">{{month}}</ion-option>
           </ion-select>
         </div>
       </label>
@@ -385,7 +417,7 @@ DatetimePickerComponent = __decorate([
       <label class="col" col-2>
         <div class="item item-input" style="position: static;">
           <div>
-            <input type="number" [(ngModel)]="bind.hour" pattern="0?([01]?[0-9]|2[0-3])" (change)="change('hour')" (blur)="changed()" required>
+            <input type="tel" [(ngModel)]="bind.hour" pattern="0?([01]?[0-9]|2[0-3])" (change)="change('hour')" (blur)="changed()" required>
           </div>
         </div>
       </label>
@@ -393,7 +425,7 @@ DatetimePickerComponent = __decorate([
       <label class="col" col-2>
         <div class="item item-input" style="position: static;">
           <div>
-            <input type="number" [(ngModel)]="bind.minute" pattern="0?[0-5]?[0-9]" (change)="change('minute')" (blur)="changed()" required>
+            <input type="tel" [(ngModel)]="bind.minute" pattern="0?[0-5]?[0-9]" (change)="change('minute')" (blur)="changed()" required>
           </div>
         </div>
       </label>
@@ -401,7 +433,7 @@ DatetimePickerComponent = __decorate([
       <label *ngIf="secondsEnabled" class="col" col-2>
         <div class="item item-input" style="position: static;">
           <div>
-            <input type="number" [(ngModel)]="bind.second" pattern="0?[0-5]?[0-9]" (change)="change('second')" (blur)="changed()" required>
+            <input type="tel" [(ngModel)]="bind.second" pattern="0?[0-5]?[0-9]" (change)="change('second')" (blur)="changed()" required>
           </div>
         </div>
       </label>
