@@ -385,7 +385,7 @@ DatetimePickerComponent = __decorate([
       <label class="col" col-2>
         <div class="item item-input" style="position: static;">
           <div>
-            <input type="text" [(ngModel)]="bind.hour" pattern="0?([01]?[0-9]|2[0-3])" (change)="change('hour')" (blur)="changed()" required>
+            <input type="number" [(ngModel)]="bind.hour" pattern="0?([01]?[0-9]|2[0-3])" (change)="change('hour')" (blur)="changed()" required>
           </div>
         </div>
       </label>
@@ -393,7 +393,7 @@ DatetimePickerComponent = __decorate([
       <label class="col" col-2>
         <div class="item item-input" style="position: static;">
           <div>
-            <input type="text" [(ngModel)]="bind.minute" pattern="0?[0-5]?[0-9]" (change)="change('minute')" (blur)="changed()" required>
+            <input type="number" [(ngModel)]="bind.minute" pattern="0?[0-5]?[0-9]" (change)="change('minute')" (blur)="changed()" required>
           </div>
         </div>
       </label>
@@ -401,7 +401,7 @@ DatetimePickerComponent = __decorate([
       <label *ngIf="secondsEnabled" class="col" col-2>
         <div class="item item-input" style="position: static;">
           <div>
-            <input type="text" [(ngModel)]="bind.second" pattern="0?[0-5]?[0-9]" (change)="change('second')" (blur)="changed()" required>
+            <input type="number" [(ngModel)]="bind.second" pattern="0?[0-5]?[0-9]" (change)="change('second')" (blur)="changed()" required>
           </div>
         </div>
       </label>
