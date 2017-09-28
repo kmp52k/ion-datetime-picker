@@ -55,6 +55,11 @@ let DatetimePickerDirective = class DatetimePickerDirective {
         picker.present(pickerOptions);
         picker.onDidDismiss(() => {
             this.input._fireBlur();
+            let e = document.getElementsByClassName('scroll-content')[0];
+            if(e) {
+                let classes = e.className.split(' block-scroll');
+                e.className = classes[0];
+            }
         });
     }
 };
