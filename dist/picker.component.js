@@ -104,7 +104,11 @@ let DatetimePickerComponent = class DatetimePickerComponent {
             }
             this[unit] += +value;
             if (unit === "month" || unit === "year") {
-                this.day = Math.min(this.day, this.getDaysInMonth(this.year, this.month));
+                if((this.month == new Date().getMonth()) && (this.year == new Date().getFullYear())) {
+                    this.day = Math.min(this.day, this.getDaysInMonth(this.year, this.month));
+                } else {
+                    this.day = 1;
+                }
             }
             this.changeViewData();
         }
@@ -124,7 +128,11 @@ let DatetimePickerComponent = class DatetimePickerComponent {
         else if (+value || +value === 0) {
             this[unit] = +value;
             if (unit === "month" || unit === "year") {
-                this.day = Math.min(this.day, this.getDaysInMonth(this.year, this.month));
+                if((this.month == new Date().getMonth()) && (this.year == new Date().getFullYear())) {
+                    this.day = Math.min(this.day, this.getDaysInMonth(this.year, this.month));
+                } else {
+                    this.day = 1;
+                }
             }
             this.changeViewData();
         }
