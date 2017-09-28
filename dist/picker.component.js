@@ -424,32 +424,32 @@ DatetimePickerComponent = __decorate([
       <div class="col"></div>
       <label class="col" col-2>
         <div class="item item-input" style="position: static;">
-          <div>
-            <input type="tel" [(ngModel)]="bind.hour" pattern="0?([01]?[0-9]|2[0-3])" (change)="change('hour')" (blur)="changed()" required>
+          <div style="text-align: center; font-size: x-large;">{{bind.hour}}
+            <!--input type="tel" [(ngModel)]="bind.hour" pattern="0?([01]?[0-9]|2[0-3])" (change)="change('hour')" (blur)="changed()" required-->
           </div>
         </div>
       </label>
       <div class="col colon">:</div>
       <label class="col" col-2>
         <div class="item item-input" style="position: static;">
-          <div>
-            <input type="tel" [(ngModel)]="bind.minute" pattern="0?[0-5]?[0-9]" (change)="change('minute')" (blur)="changed()" required>
+          <div style="text-align: center; font-size: x-large;">{{bind.minute}}
+            <!--input type="tel" [(ngModel)]="bind.minute" pattern="0?[0-5]?[0-9]" (change)="change('minute')" (blur)="changed()" required-->
           </div>
         </div>
       </label>
       <div *ngIf="secondsEnabled" class="col colon">:</div>
       <label *ngIf="secondsEnabled" class="col" col-2>
         <div class="item item-input" style="position: static;">
-          <div>
-            <input type="tel" [(ngModel)]="bind.second" pattern="0?[0-5]?[0-9]" (change)="change('second')" (blur)="changed()" required>
+          <div style="text-align: center; font-size: x-large;">{{bind.second}}
+            <!--input type="tel" [(ngModel)]="bind.second" pattern="0?[0-5]?[0-9]" (change)="change('second')" (blur)="changed()" required-->
           </div>
         </div>
       </label>
       <div *ngIf="meridiemEnabled" class="col"></div>
       <label *ngIf="meridiemEnabled" class="col" col-2>
         <div class="item item-input" style="position: static;">
-          <div>
-            <input type="text" [(ngModel)]="bind.meridiem" pattern="[aApP][mM]" (change)="change('meridiem')" (blur)="changed()" required>
+          <div style="text-align: center; font-size: x-large;">{{bind.meridiem}}
+            <!--input type="text" [(ngModel)]="bind.meridiem" pattern="[aApP][mM]" (change)="change('meridiem')" (blur)="changed()" required-->
           </div>
         </div>
       </label>
