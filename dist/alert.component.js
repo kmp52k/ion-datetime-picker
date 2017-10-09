@@ -46,7 +46,7 @@ DatetimePickerAlertComponent = __decorate([
       <ion-datetime-picker [modelDate]="d.modelDate" [dateEnabled]="d.dateEnabled" [timeEnabled]="d.timeEnabled" [isMondayFirst]="d.isMondayFirst" [secondsEnabled]="d.secondsEnabled" [meridiemEnabled]="d.meridiemEnabled" [onlyValid]="d.onlyValid" [monthNames]="d.monthNames" [weekdayNames]="d.weekdayNames" (pickerChange)="onChange($event)"></ion-datetime-picker>
       <div class="alert-button-group" [ngClass]="{'alert-button-group-vertical':d.buttons.length>2}">
         <button ion-button="alert-button" *ngFor="let b of d.buttons" (click)="btnClick(b)" [ngClass]="b.cssClass">
-          <span class="pwcorange">{{b.text}}</span>
+          <span class="pwcorange" style="font-weight: normal;">{{b.text}}</span>
         </button>
       </div>
     </div>
