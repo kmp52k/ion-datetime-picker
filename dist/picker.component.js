@@ -12,6 +12,7 @@ let DatetimePickerComponent = class DatetimePickerComponent {
     constructor() {
         this.allMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         this.showMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        this.allYears = [];
         this.pickerChange = new EventEmitter();
         this.rows = [0, 1, 2, 3, 4, 5];
         this.cols = [1, 2, 3, 4, 5, 6, 7];
@@ -31,6 +32,18 @@ let DatetimePickerComponent = class DatetimePickerComponent {
                 return tempDate;
             },
         };
+        this.monthLeftDisable = false;
+        this.monthRightDisable = false;
+        let currentYear = new Date().getFullYear();
+        this.lastYear;
+        for (var i = 0; i < 7; i++) {
+            if(this.allYears.indexOf(currentYear+i)<0) {
+                this.allYears.push(currentYear+i);
+            }
+            if(i==6) {
+                this.lastYear = currentYear+i;
+            }
+        }
     }
     ngOnInit() {
         let currentMonth = new Date().getMonth();
@@ -94,23 +107,27 @@ let DatetimePickerComponent = class DatetimePickerComponent {
         this.changeViewData();
     }
     changeBy(value, unit) {
-        if (+value) {
-            // DST workaround
-            if ((unit === "hour" || unit === "minute") && value === -1) {
-                let date = new Date(this.year, this.month, this.day, this.hour - 1, this.minute);
-                if ((this.minute === 0 || unit === "hour") && this.hour === date.getHours()) {
-                    this.hour--;
+        if((unit === "month") && (((this.monthLeftDisable == true) && (value == -1)) || ((this.monthRightDisable == true) && (value == 1)))) {
+            //month navigation disabled
+        } else {
+            if (+value) {
+                // DST workaround
+                if ((unit === "hour" || unit === "minute") && value === -1) {
+                    let date = new Date(this.year, this.month, this.day, this.hour - 1, this.minute);
+                    if ((this.minute === 0 || unit === "hour") && this.hour === date.getHours()) {
+                        this.hour--;
+                    }
                 }
-            }
-            this[unit] += +value;
-            if (unit === "month" || unit === "year") {
-                if((this.month == new Date().getMonth()) && (this.year == new Date().getFullYear())) {
-                    this.day = Math.min(this.day, this.getDaysInMonth(this.year, this.month));
-                } else {
-                    this.day = 1;
+                this[unit] += +value;
+                if (unit === "month" || unit === "year") {
+                    if((this.month == new Date().getMonth()) && (this.year == new Date().getFullYear())) {
+                        this.day = Math.min(this.day, this.getDaysInMonth(this.year, this.month));
+                    } else {
+                        this.day = 1;
+                    }
                 }
-            }
-            this.changeViewData();
+                this.changeViewData();
+            }   
         }
     }
     change(unit) {
@@ -286,6 +303,39 @@ let DatetimePickerComponent = class DatetimePickerComponent {
                 this.firstDay = (this.firstDay || 7) - 1;
             }
             this.daysInMonth = this.getDaysInMonth(this.year, this.month);
+            //disabling month navigation
+            let startMonth = new Date().getMonth();;
+            let startYear = new Date().getFullYear();
+            let validAfter;
+            if(this.onlyValid) {
+                validAfter = JSON.parse(this.onlyValid);
+                if(validAfter.after != 'today') {
+                    startMonth = Number.parseInt(validAfter.after.split('/')[0])-1;
+                    startYear = Number.parseInt(validAfter.after.split('/')[2]);
+                } 
+            }
+            if((this.month == startMonth) && (this.year == startYear)) {
+                this.monthLeftDisable = true;
+                if(document.getElementById('monthLeft')) {
+                    document.getElementById('monthLeft').setAttribute('style', 'color: rgba(220, 105, 0, .4);');
+                } else {
+                    setTimeout(() => {document.getElementById('monthLeft').setAttribute('style', 'color: rgba(220, 105, 0, .4);');}, 500);
+                }
+            } else if(this.monthLeftDisable == true) {
+                this.monthLeftDisable = false;
+                document.getElementById('monthLeft').removeAttribute('style');
+            }
+            if((this.month == 11) && (this.year == this.lastYear)) {
+                this.monthRightDisable = true;
+                if(document.getElementById('monthRight')) {
+                    document.getElementById('monthRight').setAttribute('style', 'color: rgba(220, 105, 0, .4);');
+                } else {
+                    setTimeout(() => {document.getElementById('monthRight').setAttribute('style', 'color: rgba(220, 105, 0, .4);');}, 500);
+                }
+            } else if(this.monthRightDisable == true) {
+                this.monthRightDisable = false;
+                document.getElementById('monthRight').removeAttribute('style');
+            }
         }
         if (this.timeEnabled) {
             this.hour = date.getHours();
@@ -358,7 +408,7 @@ DatetimePickerComponent = __decorate([
         template: `
     <div *ngIf="dateEnabled" class="row month-year">
       <div class="col left-arrow" col-auto>
-        <button type="button" ion-button icon-only clear (click)="changeBy(-1, 'month')"><ion-icon class="pwcorange" name="arrow-back"></ion-icon></button>
+        <button type="button" ion-button icon-only clear (click)="changeBy(-1, 'month')"><ion-icon id="monthLeft" class="pwcorange" name="arrow-back"></ion-icon></button>
       </div>
       <label class="col month-input" style="padding: 0px; padding-right: 15px;">
         <div class="item item-input item-select">
@@ -370,15 +420,7 @@ DatetimePickerComponent = __decorate([
       <label class="col year-input" col-3 style="padding: 0px;">
       <div class="item item-input item-select">
       <ion-select interface="popover" [(ngModel)]="bind.year" (ionChange)="change('year')" (blur)="changed()" required>
-        <ion-option  value="2017">2017</ion-option>
-        <ion-option  value="2018">2018</ion-option>
-        <ion-option  value="2019">2019</ion-option>
-        <ion-option  value="2020">2020</ion-option>
-        <ion-option  value="2021">2021</ion-option>
-        <ion-option  value="2022">2022</ion-option>
-        <ion-option  value="2023">2023</ion-option>
-        <ion-option  value="2024">2024</ion-option>
-        <ion-option  value="2025">2025</ion-option>
+        <ion-option *ngFor="let year of allYears" [value]="year">{{year}}</ion-option>
       </ion-select>
     </div>
         <!--div class="item item-input">
@@ -388,7 +430,7 @@ DatetimePickerComponent = __decorate([
         </div-->
       </label>
       <div class="col right-arrow" col-auto>
-        <button type="button" ion-button icon-only clear (click)="changeBy(+1, 'month')"><ion-icon class="pwcorange" name="arrow-forward"></ion-icon></button>
+        <button type="button" ion-button icon-only clear (click)="changeBy(+1, 'month')"><ion-icon id="monthRight" class="pwcorange" name="arrow-forward"></ion-icon></button>
       </div>
     </div>
 
