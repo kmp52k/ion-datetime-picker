@@ -401,7 +401,7 @@ DatetimePickerComponent = __decorate([
       <div class="row calendar days" *ngFor="let y of rows">
         <div class="col" *ngFor="let x of cols">
           <div [hidden]="isDayHidden(x, y)"
-              (click)="changeDay(x, y)" class="day"
+              (tap)="changeDay(x, y)" class="day"
               [ngClass]="{ 'disabled': !isEnabled(cellDay(x, y)), 'selected': cellDay(x, y) === day, 'today': cellDay(x, y) === today.day && month === today.month && year === today.year }">
             {{cellDay(x, y)}}
           </div>
