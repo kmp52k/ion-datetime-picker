@@ -37,11 +37,11 @@ let DatetimePickerComponent = class DatetimePickerComponent {
         let currentYear = new Date().getFullYear();
         this.lastYear;
         for (var i = 0; i < 7; i++) {
-            if(this.allYears.indexOf(currentYear+i)<0) {
-                this.allYears.push(currentYear+i);
+            if (this.allYears.indexOf(currentYear + i) < 0) {
+                this.allYears.push(currentYear + i);
             }
-            if(i==6) {
-                this.lastYear = currentYear+i;
+            if (i == 6) {
+                this.lastYear = currentYear + i;
             }
         }
     }
@@ -63,8 +63,8 @@ let DatetimePickerComponent = class DatetimePickerComponent {
     }
     getMonthDisplay() {
         let year = new Date().getFullYear();
-        if(this.bind.year) {
-            if(this.bind.year>year) {
+        if (this.bind.year) {
+            if (this.bind.year > year) {
                 return this.allMonths;
             }
             else {
@@ -77,16 +77,16 @@ let DatetimePickerComponent = class DatetimePickerComponent {
     }
     getMonthNumber(index) {
         let year = new Date().getFullYear();
-        if(this.bind.year) {
-            if(this.bind.year>year) {
+        if (this.bind.year) {
+            if (this.bind.year > year) {
                 return index;
             }
             else {
-                return index+(new Date().getMonth());
+                return index + (new Date().getMonth());
             }
         }
         else {
-            return index+(new Date().getMonth());
+            return index + (new Date().getMonth());
         }
     }
     cellDay(x, y) {
@@ -107,7 +107,7 @@ let DatetimePickerComponent = class DatetimePickerComponent {
         this.changeViewData();
     }
     changeBy(value, unit) {
-        if((unit === "month") && (((this.monthLeftDisable == true) && (value == -1)) || ((this.monthRightDisable == true) && (value == 1)))) {
+        if ((unit === "month") && (((this.monthLeftDisable == true) && (value == -1)) || ((this.monthRightDisable == true) && (value == 1)))) {
             //month navigation disabled
         } else {
             if (+value) {
@@ -120,14 +120,14 @@ let DatetimePickerComponent = class DatetimePickerComponent {
                 }
                 this[unit] += +value;
                 if (unit === "month" || unit === "year") {
-                    if((this.month == new Date().getMonth()) && (this.year == new Date().getFullYear())) {
+                    if ((this.month == new Date().getMonth()) && (this.year == new Date().getFullYear())) {
                         this.day = Math.min(this.day, this.getDaysInMonth(this.year, this.month));
                     } else {
                         this.day = 1;
                     }
                 }
                 this.changeViewData();
-            }   
+            }
         }
     }
     change(unit) {
@@ -145,7 +145,7 @@ let DatetimePickerComponent = class DatetimePickerComponent {
         else if (+value || +value === 0) {
             this[unit] = +value;
             if (unit === "month" || unit === "year") {
-                if((this.month == new Date().getMonth()) && (this.year == new Date().getFullYear())) {
+                if ((this.month == new Date().getMonth()) && (this.year == new Date().getFullYear())) {
                     this.day = Math.min(this.day, this.getDaysInMonth(this.year, this.month));
                 } else {
                     this.day = 1;
@@ -166,7 +166,7 @@ let DatetimePickerComponent = class DatetimePickerComponent {
         let constraints = [].concat(this.onlyValid);
         return constraints.every((currentRule) => {
             let isValid = true;
-            currentRule=JSON.parse(currentRule);
+            currentRule = JSON.parse(currentRule);
             // console.log(currentRule);
             // console.log(currentRule.after);
             if (currentRule.after) {
@@ -307,32 +307,32 @@ let DatetimePickerComponent = class DatetimePickerComponent {
             let startMonth = new Date().getMonth();;
             let startYear = new Date().getFullYear();
             let validAfter;
-            if(this.onlyValid) {
+            if (this.onlyValid) {
                 validAfter = JSON.parse(this.onlyValid);
-                if(validAfter.after != 'today') {
-                    startMonth = Number.parseInt(validAfter.after.split('/')[0])-1;
+                if (validAfter.after != 'today') {
+                    startMonth = Number.parseInt(validAfter.after.split('/')[0]) - 1;
                     startYear = Number.parseInt(validAfter.after.split('/')[2]);
-                } 
+                }
             }
-            if((this.month == startMonth) && (this.year == startYear)) {
+            if ((this.month == startMonth) && (this.year == startYear)) {
                 this.monthLeftDisable = true;
-                if(document.getElementById('monthLeft')) {
+                if (document.getElementById('monthLeft')) {
                     document.getElementById('monthLeft').setAttribute('style', 'color: rgba(220, 105, 0, .4);');
                 } else {
-                    setTimeout(() => {document.getElementById('monthLeft').setAttribute('style', 'color: rgba(220, 105, 0, .4);');}, 500);
+                    setTimeout(() => { document.getElementById('monthLeft').setAttribute('style', 'color: rgba(220, 105, 0, .4);'); }, 500);
                 }
-            } else if(this.monthLeftDisable == true) {
+            } else if (this.monthLeftDisable == true) {
                 this.monthLeftDisable = false;
                 document.getElementById('monthLeft').removeAttribute('style');
             }
-            if((this.month == 11) && (this.year == this.lastYear)) {
+            if ((this.month == 11) && (this.year == this.lastYear)) {
                 this.monthRightDisable = true;
-                if(document.getElementById('monthRight')) {
+                if (document.getElementById('monthRight')) {
                     document.getElementById('monthRight').setAttribute('style', 'color: rgba(220, 105, 0, .4);');
                 } else {
-                    setTimeout(() => {document.getElementById('monthRight').setAttribute('style', 'color: rgba(220, 105, 0, .4);');}, 500);
+                    setTimeout(() => { document.getElementById('monthRight').setAttribute('style', 'color: rgba(220, 105, 0, .4);'); }, 500);
                 }
-            } else if(this.monthRightDisable == true) {
+            } else if (this.monthRightDisable == true) {
                 this.monthRightDisable = false;
                 document.getElementById('monthRight').removeAttribute('style');
             }
@@ -361,6 +361,67 @@ let DatetimePickerComponent = class DatetimePickerComponent {
         date.setHours(0, 0, 0, 0);
         return date;
     }
+
+    openMenu(unit) {
+        let e = document.getElementsByClassName('alert-wrapper ion-datetime-picker-wrapper')[0];
+        // let style = e.getAttribute('style');
+        // e.setAttribute('style', style+' background-color: #dbdbdf;');
+        var newe = document.createElement('div');
+        newe.setAttribute('style', 'position: absolute; z-index: 1; background: rgba(0, 0, 0, 0.2); width:250px; height: 100%');
+        newe.setAttribute('id', 'month-back');
+        newe.onclick = function () {
+            let alertElement = document.getElementsByClassName('alert-wrapper ion-datetime-picker-wrapper')[0];
+            alertElement.removeChild(alertElement.children[3]);
+            let menu = document.getElementsByClassName('menu-select')[0];
+            menu.removeAttribute('style');
+            menu = document.getElementsByClassName('menu-select')[1];
+            menu.removeAttribute('style');
+        }
+        e.appendChild(newe);
+        let menu; 
+        if(unit == 'month') {
+            menu = document.getElementsByClassName('menu-select')[0];
+            menu.setAttribute('style', 'display: initial; left: 0px; width: 97px;');
+        } else {
+            menu = document.getElementsByClassName('menu-select')[1];
+            menu.setAttribute('style', 'display: initial; left: 0px; width: 60px;');
+        }
+    }
+
+    clickMonth(index) {
+        this.bind.month = this.getMonthNumber(index);
+        let alertElement = document.getElementsByClassName('alert-wrapper ion-datetime-picker-wrapper')[0];
+        alertElement.removeChild(alertElement.children[3]);
+        let menu = document.getElementsByClassName('menu-select')[0];
+        menu.removeAttribute('style');
+        this.change('month');
+    }
+
+    monthSelected(index) {
+        if(this.getMonthNumber(index) == this.bind.month) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    clickYear(year) {
+        this.bind.year = year;
+        let alertElement = document.getElementsByClassName('alert-wrapper ion-datetime-picker-wrapper')[0];
+        alertElement.removeChild(alertElement.children[3]);
+        let menu = document.getElementsByClassName('menu-select')[1];
+        menu.removeAttribute('style');
+        this.change('year');
+    }
+
+    yearSelected(year) {
+        if(year == this.bind.year) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 };
 __decorate([
     Input(),
@@ -412,17 +473,31 @@ DatetimePickerComponent = __decorate([
       </div>
       <label class="col month-input" style="padding: 0px; padding-right: 15px;">
         <div class="item item-input item-select">
-          <ion-select interface="popover" [(ngModel)]="bind.month" (ionChange)="change('month')">
+          <!--ion-select interface="popover" [(ngModel)]="bind.month" (ionChange)="change('month')">
             <ion-option *ngFor="let month of getMonthDisplay(); let numberOfMonth = index" [value]="getMonthNumber(numberOfMonth)">{{month}}</ion-option>
-          </ion-select>
+          </ion-select-->
+          <div class="month-select" (click)="openMenu('month')">
+            <span>{{allMonths[bind.month]}}</span>
+            <ion-icon class="menu-arrow" name="md-arrow-dropdown"></ion-icon>
+          </div>
+        </div>
+        <div class="menu-select">
+            <div *ngFor="let month of getMonthDisplay(); let numberOfMonth = index" (click)="clickMonth(numberOfMonth)" class="menu-element" [ngClass]="{'menu-element-selected': monthSelected(numberOfMonth)}">{{month}}</div>
         </div>
       </label>
       <label class="col year-input" col-3 style="padding: 0px;">
       <div class="item item-input item-select">
-      <ion-select interface="popover" [(ngModel)]="bind.year" (ionChange)="change('year')" (blur)="changed()" required>
+      <!--ion-select interface="popover" [(ngModel)]="bind.year" (ionChange)="change('year')" (blur)="changed()" required>
         <ion-option *ngFor="let year of allYears" [value]="year">{{year}}</ion-option>
-      </ion-select>
+      </ion-select-->
+        <div class="year-select" (click)="openMenu('year')">
+            <span>{{bind.year}}</span>
+            <ion-icon class="menu-arrow" name="md-arrow-dropdown"></ion-icon>
+        </div>
     </div>
+        <div class="menu-select">
+            <div *ngFor="let year of allYears" (click)="clickYear(year)" class="menu-element" [ngClass]="{'menu-element-selected': yearSelected(year)}">{{year}}</div>
+        </div>
         <!--div class="item item-input">
           <div>
             <input type="number" [(ngModel)]="bind.year" min="1900" max="2999" (change)="change('year')" (blur)="changed()" required>
@@ -510,6 +585,53 @@ DatetimePickerComponent = __decorate([
     </div>
   `,
         styles: [`
+
+        .menu-select {
+            position: absolute;
+            //width: 96px;
+            max-height: 180px;
+            background: white;
+            z-index: 2;
+            border: 0.55px solid #9e9e9e;
+            overflow-y: scroll;
+            border-bottom: 1px solid #9e9e9e;
+            display: none;
+        }
+
+        .menu-element {
+            height: 30px;
+            font-size: 16px;
+            //width: 96px;
+            border-bottom: 0.55px solid #9e9e9e;
+            padding-top: 6px;
+        }
+
+        .menu-element-selected {
+            font-weight: bold;
+            color: #dc6900;
+        }
+
+        .menu-arrow {
+            display: block;
+            position: absolute;
+            right: 0px;
+            top: 11px;
+        }
+
+        .month-select {
+            height: 40px;
+            width: 96px;
+            font-size: 16px;
+            padding-top: 10px;
+        }
+
+        .year-select {
+            height: 40px;
+            width: 60px;
+            font-size: 16px;
+            padding-top: 10px;
+        }
+
     :host {
       padding: 0 5px;
       overflow-x: hidden;
