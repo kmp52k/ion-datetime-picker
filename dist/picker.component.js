@@ -476,13 +476,13 @@ DatetimePickerComponent = __decorate([
           <!--ion-select interface="popover" [(ngModel)]="bind.month" (ionChange)="change('month')">
             <ion-option *ngFor="let month of getMonthDisplay(); let numberOfMonth = index" [value]="getMonthNumber(numberOfMonth)">{{month}}</ion-option>
           </ion-select-->
-          <div class="month-select" (click)="openMenu('month')">
+          <div class="month-select" (tap)="openMenu('month')">
             <span>{{allMonths[bind.month]}}</span>
             <ion-icon class="menu-arrow" name="md-arrow-dropdown"></ion-icon>
           </div>
         </div>
         <div class="menu-select">
-            <div *ngFor="let month of getMonthDisplay(); let numberOfMonth = index" (click)="clickMonth(numberOfMonth)" class="menu-element" [ngClass]="{'menu-element-selected': monthSelected(numberOfMonth)}">{{month}}</div>
+            <div *ngFor="let month of getMonthDisplay(); let numberOfMonth = index" (tap)="clickMonth(numberOfMonth)" class="menu-element" [ngClass]="{'menu-element-selected': monthSelected(numberOfMonth)}">{{month}}</div>
         </div>
       </label>
       <label class="col year-input" col-3 style="padding: 0px;">
@@ -490,13 +490,13 @@ DatetimePickerComponent = __decorate([
       <!--ion-select interface="popover" [(ngModel)]="bind.year" (ionChange)="change('year')" (blur)="changed()" required>
         <ion-option *ngFor="let year of allYears" [value]="year">{{year}}</ion-option>
       </ion-select-->
-        <div class="year-select" (click)="openMenu('year')">
+        <div class="year-select" (tap)="openMenu('year')">
             <span>{{bind.year}}</span>
             <ion-icon class="menu-arrow" name="md-arrow-dropdown"></ion-icon>
         </div>
     </div>
         <div class="menu-select">
-            <div *ngFor="let year of allYears" (click)="clickYear(year)" class="menu-element" [ngClass]="{'menu-element-selected': yearSelected(year)}">{{year}}</div>
+            <div *ngFor="let year of allYears" (tap)="clickYear(year)" class="menu-element" [ngClass]="{'menu-element-selected': yearSelected(year)}">{{year}}</div>
         </div>
         <!--div class="item item-input">
           <div>
