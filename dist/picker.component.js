@@ -367,7 +367,7 @@ let DatetimePickerComponent = class DatetimePickerComponent {
         // let style = e.getAttribute('style');
         // e.setAttribute('style', style+' background-color: #dbdbdf;');
         var newe = document.createElement('div');
-        newe.setAttribute('style', 'position: absolute; z-index: 1; background: rgba(0, 0, 0, 0.2); width:250px; height: 100%');
+        newe.setAttribute('style', 'position: absolute; z-index: 1; background: rgba(0, 0, 0, 0.2); width:100%; height: 100%; top: 0px; left: 0px; border-radius: 13px;');
         newe.setAttribute('id', 'month-back');
         newe.onclick = function () {
             let alertElement = document.getElementsByClassName('alert-wrapper ion-datetime-picker-wrapper')[0];
@@ -476,7 +476,7 @@ DatetimePickerComponent = __decorate([
           <!--ion-select interface="popover" [(ngModel)]="bind.month" (ionChange)="change('month')">
             <ion-option *ngFor="let month of getMonthDisplay(); let numberOfMonth = index" [value]="getMonthNumber(numberOfMonth)">{{month}}</ion-option>
           </ion-select-->
-          <div class="month-select" (tap)="openMenu('month')">
+          <div class="month-select" (click)="openMenu('month')">
             <span>{{allMonths[bind.month]}}</span>
             <ion-icon class="menu-arrow" name="md-arrow-dropdown"></ion-icon>
           </div>
@@ -490,7 +490,7 @@ DatetimePickerComponent = __decorate([
       <!--ion-select interface="popover" [(ngModel)]="bind.year" (ionChange)="change('year')" (blur)="changed()" required>
         <ion-option *ngFor="let year of allYears" [value]="year">{{year}}</ion-option>
       </ion-select-->
-        <div class="year-select" (tap)="openMenu('year')">
+        <div class="year-select" (click)="openMenu('year')">
             <span>{{bind.year}}</span>
             <ion-icon class="menu-arrow" name="md-arrow-dropdown"></ion-icon>
         </div>
