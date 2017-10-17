@@ -1,0 +1,54 @@
+import { EventEmitter, OnInit } from "@angular/core";
+export declare class DatetimePickerComponent implements OnInit {
+    modelDate: Date;
+    dateEnabled: boolean;
+    timeEnabled: boolean;
+    isMondayFirst: boolean;
+    secondsEnabled: boolean;
+    meridiemEnabled: boolean;
+    onlyValid: any;
+    monthNames: string[];
+    weekdayNames: string[];
+    pickerChange: EventEmitter<Date>;
+    firstDay: number;
+    daysInMonth: number;
+    readonly rows: number[];
+    readonly cols: number[];
+    weekdays: number[];
+    year: number;
+    month: number;
+    day: number;
+    hour: number;
+    minute: number;
+    second: number;
+    meridiem: string;
+    today: {
+        day: number;
+        month: number;
+        year: number;
+    };
+    bind: {
+        month?: string | number;
+        year?: string | number;
+        hour?: string | number;
+        minute?: string | number;
+        second?: string | number;
+        meridiem?: string;
+    };
+    private lastDateSet;
+    ngOnInit(): void;
+    cellDay(x: number, y: number): number;
+    isDayHidden(x: number, y: number): boolean;
+    processModel(): void;
+    changeBy(value: number, unit: "year" | "month" | "hour" | "minute" | "second"): void;
+    change(unit: "year" | "month" | "hour" | "minute" | "second" | "meridiem"): void;
+    changeDay(x: number, y: number): void;
+    isEnabled(day: number, computeNextValidDate?: boolean): boolean;
+    changed(): void;
+    private triggerChange();
+    private setNextValidDate(date, dayToAdd?);
+    private setLastValidDate();
+    private changeViewData();
+    private getDaysInMonth(year, month);
+    private createDate(stringDate);
+}
